@@ -1,10 +1,10 @@
 function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#cel").innerHTML = Math.round(
-    response.data.main.temp
+      response.data.main.temp
   );
   document.querySelector(
-    "#feels"
+      "#feels"
   ).innerHTML = `feels like ${response.data.main.feels_like}`;
 }
 
