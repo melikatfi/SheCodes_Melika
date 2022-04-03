@@ -33,15 +33,18 @@
     color: #9ab9cf !important;
     border-radius: 0 20px 20px 0 !important;
 }
+.btn-current{
+    background-color: #eaf6f6 !important;
+    color: #9ab9cf !important;
+    margin: 0 1px 0 0 !important;
+    border: none !important;
+    border-right: solid 1px #ffffff !important;
+    text-decoration: none;
+}
 
 input {
     border: solid 2px #eaf6f6 !important;
     border-radius: 20px 0 0 20px !important;
-}
-
-.sun {
-    font-size: 130px;
-    color: #f5fa36;
 }
 
 .current {
@@ -69,7 +72,7 @@ input {
         margin-bottom: 6px;
         vertical-align: center;
     }
-    .sun {
+    .icon {
         font-size: 60px;
         padding: 10px;
     }
@@ -91,7 +94,12 @@ input {
 .degree:hover {
     color: #6d757d;
 }
-
+#wind{
+    font-size: 16px;
+}
+#desc{
+    color: #6d757d;
+}
 @media only screen and (min-width: 700px) {
     .main-card {
         margin: 30px auto !important;

@@ -1,11 +1,16 @@
 function displayWeatherCondition(response) {
-  document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#cel").innerHTML = Math.round(
-      response.data.main.temp
-  );
-  document.querySelector(
-      "#feels"
-  ).innerHTML = `feels like ${response.data.main.feels_like}`;
+  let city = response.data.name;
+  let cel = Math.round(response.data.main.temp);
+  let wind = Math.round(response.data.wind.speed);
+  let desc = response.data.weather[0].description;
+  let iCode = response.data.weather[0].icon;
+  let img = `http://openweathermap.org/img/wn/${iCode}@2x.png`;
+
+  document.querySelector("#city").innerHTML = `${city}`;
+  document.querySelector("#cel").innerHTML = `${cel} °C`;
+  document.querySelector("#wind").innerHTML = `wind speed : ${wind} m/s`;
+  document.querySelector("#desc").innerHTML = `${desc}`;
+  document.querySelector("#i").setAttribute("src", `${img}`);
 }
 
 function searchCity(city) {
@@ -14,25 +19,37 @@ function searchCity(city) {
   axios.get(apiUrl).then(displayWeatherCondition);
 }
 
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#search").value;
-  searchCity(city);
-}
-
-function searchLocation(position) {
+function currentLoc(position) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-
   axios.get(apiUrl).then(displayWeatherCondition);
 }
+navigator.geolocation.getCurrentPosition(currentLoc);
 
-function getCurrentLocation(event) {
+function currentBtn(event) {
   event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
+  navigator.geolocation.getCurrentPosition(currentLoc);
 }
 
-let searchForm = document.querySelector("#searchBar");
-searchForm.addEventListener("submit", handleSubmit);
+let current = document.querySelector("#btn-current");
+if (current) {
+  current.addEventListener("click", currentBtn);
+}
 
-searchCity("Tehran");
+function Submit(event) {
+  event.preventDefault();
+  let search = document.querySelector("#search").value;
+  searchCity(search);
+}
+let searchBar = document.querySelector("#searchBar");
+if (searchBar) {
+  searchBar.addEventListener("submit", Submit);
+}
+
+function showFar() {
+  alert("faaar");
+}
+let far = document.querySelector("#far");
+if (far) {
+  far.addEventListener("click", showFar);
+}

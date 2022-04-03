@@ -37,6 +37,9 @@
                                 class="form-control"
                                 placeholder="Search for a city.."
                         />
+                        <button class="input-group-text btn-current" id="btn-current">
+                            current
+                        </button>
                         <button class="input-group-text btn" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
@@ -47,17 +50,18 @@
                         <div class="card p-3 current">
                             <div class="row">
                                 <div class="card-body text-center col-6 pt-lg-5">
-                                    <h1 class="card-title" id="city">Tehran</h1>
+                                    <h1 class="card-title" id="city"></h1>
+                                    <h4 id="desc"></h4>
                                     <h4 class="card-text text-secondary" id="degree">
-                                        <span id="deg">13</span>
-                                        <a class="degree" id="cel">c</a>
-                                        <!-- <a class="degree" id="far">f</a> -->
+                                        <span id="deg"></span>
+                                        <a class="degree" id="cel"></a>
+                                        <a class="degree" id="far">3</a>
                                         <br />
-                                        <span id="feels">Feels like 11</span>
+                                        <span id="wind"></span>
                                     </h4>
                                 </div>
-                                <div class="col-6 sun text-center mt-4">
-                                    <i class="fa fa-sun"></i>
+                                <div class="col-6 icon text-center my-auto">
+                                    <img id="i" src="" alt="icon">
                                 </div>
                             </div>
                         </div>
@@ -82,9 +86,6 @@
                             <h6 class="text-secondary">0c</h6>
                         </div>
                     </div>
-                </div>
-                <div class="text-center">
-                    <a href="https://github.com/melikatfi/SheCodes_Melika" class="text-secondary" target="_blank">Our GitHub repository</a>
                 </div>
             </div>
         </div>
