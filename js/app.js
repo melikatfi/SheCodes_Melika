@@ -7,7 +7,7 @@ function displayWeatherCondition(response) {
   let img = `http://openweathermap.org/img/wn/${iCode}@2x.png`;
 
   document.querySelector("#city").innerHTML = `${city}`;
-  document.querySelector("#cel").innerHTML = `${cel}`;
+  document.querySelector("#deg").innerHTML = `${cel}`;
   document.querySelector("#wind").innerHTML = `wind speed : ${wind} m/s`;
   document.querySelector("#desc").innerHTML = `${desc}`;
   document.querySelector("#i").setAttribute("src", `${img}`);
