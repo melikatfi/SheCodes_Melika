@@ -1,13 +1,13 @@
 function displayWeatherCondition(response) {
   let city = response.data.name;
-  let cel = Math.round(response.data.main.temp);
+  cel = Math.round(response.data.main.temp);
   let wind = Math.round(response.data.wind.speed);
   let desc = response.data.weather[0].description;
   let iCode = response.data.weather[0].icon;
   let img = `http://openweathermap.org/img/wn/${iCode}@2x.png`;
 
   document.querySelector("#city").innerHTML = `${city}`;
-  document.querySelector("#cel").innerHTML = `${cel} °C`;
+  document.querySelector("#cel").innerHTML = `${cel}`;
   document.querySelector("#wind").innerHTML = `wind speed : ${wind} m/s`;
   document.querySelector("#desc").innerHTML = `${desc}`;
   document.querySelector("#i").setAttribute("src", `${img}`);
@@ -46,10 +46,23 @@ if (searchBar) {
   searchBar.addEventListener("submit", Submit);
 }
 
-function showFar() {
-  alert("faaar");
+let cel = null;
+
+function showFar(event) {
+  event.preventDefault();
+  let farVal = Math.round((cel * 9) / 5 + 32);
+  document.querySelector("#deg").innerHTML = `${farVal}`;
 }
-let far = document.querySelector("#far");
-if (far) {
-  far.addEventListener("click", showFar);
+let farClick = document.querySelector("#far");
+if (farClick) {
+  farClick.addEventListener("click", showFar);
+}
+
+function showCel(event) {
+  event.preventDefault();
+  document.querySelector("#deg").innerHTML = `${cel}`;
+}
+let celClick = document.querySelector("#cel");
+if (celClick) {
+  celClick.addEventListener("click", showCel);
 }
