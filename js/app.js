@@ -1,3 +1,76 @@
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${hours}:${minutes}`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row text-center">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+          forecastHTML +
+          `
+          <div class="col-2 p-3 p-sm-2 cloud-p">
+          <img
+          src="http://openweathermap.org/img/wn/${
+          forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+          />
+          <h6 style="color: #9ab9cf">${formatDay(forecastDay.dt)}</h6>
+          <h6 class="text-secondary">${Math.round(
+              forecastDay.temp.max
+          )}° / 
+          ${Math.round(
+              forecastDay.temp.min
+          )}°
+          </h6>
+          </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "b69a892df9f98e17c54dab23a734680a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayWeatherCondition(response) {
   let city = response.data.name;
   cel = Math.round(response.data.main.temp);
@@ -11,6 +84,8 @@ function displayWeatherCondition(response) {
   document.querySelector("#wind").innerHTML = `wind speed : ${wind} m/s`;
   document.querySelector("#desc").innerHTML = `${desc}`;
   document.querySelector("#i").setAttribute("src", `${img}`);
+
+  getForecast(response.data.coord);
 }
 
 function searchCity(city) {
