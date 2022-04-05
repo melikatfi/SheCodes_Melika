@@ -106,3 +106,12 @@ input {
         vertical-align: center;
     }
 }
+.info{
+    -webkit-transition: ease 5ms;
+    text-decoration: none;
+    color: #9ab9cf !important;
+    transition: ease 5ms;
+}
+.info:hover{
+    color: #849eb0 !important;
+}
