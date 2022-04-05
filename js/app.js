@@ -3,7 +3,7 @@ function displayWeatherCondition(response) {
   cel = Math.round(response.data.main.temp);
   let wind = Math.round(response.data.wind.speed);
   let desc = response.data.weather[0].description;
-  let iCode = response.data.weather[0].icon;
+  iCode = response.data.weather[0].icon;
   let img = `http://openweathermap.org/img/wn/${iCode}@2x.png`;
 
   document.querySelector("#city").innerHTML = `${city}`;
@@ -47,6 +47,7 @@ if (searchBar) {
 }
 
 let cel = null;
+let iCode = null
 
 function showFar(event) {
   event.preventDefault();
@@ -65,4 +66,31 @@ function showCel(event) {
 let celClick = document.querySelector("#cel");
 if (celClick) {
   celClick.addEventListener("click", showCel);
+}
+function showDef(){
+  document.querySelector("#vid").setAttribute("src", `imgvid/Cloudy-sky.mp4`);
+}
+
+if(iCode === '01d' || '01n' || '09d' || '09n'){
+  document.querySelector("#vid").setAttribute("src", `imgvid/clearsky.mp4`);
+}else {
+  if(iCode === '02d' || '02n' || '03d' || '03n' || '04d' || '04n'){
+    document.querySelector("#vid").setAttribute("src", `imgvid/Cloudy-sky.mp4`);
+  }else{
+    if (iCode === '09d' || '09n' || '10d' || '10n'){
+      document.querySelector("#vid").setAttribute("src", `imgvid/Rainonapuddle.mp4`);
+    }else {
+      if (iCode === '11d' || '11n') {
+        document.querySelector("#vid").setAttribute("src", `imgvid/thunder.mov`);
+      }else {
+        if (iCode === '13d' || '13n') {
+          document.querySelector("#vid").setAttribute("src", `imgvid/Snow.mp4`);
+        }else {
+          if (iCode === '50d' || '50n') {
+            document.querySelector("#vid").setAttribute("src", `imgvid/mist.mp4`);
+          }
+        }
+      }
+    }
+  }
 }
